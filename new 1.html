@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Movie Booking System</title>
+		<link rel="stylesheet" type="text/css" href="new 1.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<button>click here
+		<a href="http://localhost/index.php"></a></button>
+	</head>
+</html>
+
+<body>
+	<button id="finish">Finish</button>
+	<div id="messagePanel" class="messagePanel"></id>
+	<script>
+	$(document).ready(function() {
+	createseating();
+})
+var selectedSeats = Array();
+function createseating(){
+	var seatingValue=[];
+	for(var i=0;i<10;i++){
+		for(var j=0;j<10;j++){
+			var seatingStyle="<div id='"+(i*10+j)+"' class='seat available'></div>";
+			seatingValue.push(seatingStyle);
+			
+			if(j==9){
+				var seatingStyle="<div class='clearfix'></div>";
+				seatingValue.push(seatingStyle);
+			}
+		}
+	}
+	$('#messagePanel').html(seatingValue);
+		$(function(){
+			$('.seat').on('click',function(){
+				if($(this).hasClass("selected")){
+					$(this).removeClass("selected");
+					var tmp = selectedSeats.indexOf(this.id);
+					selectedSeats.splice(tmp, 1)
+				}else{
+					$(this).addClass("selected");
+					selectedSeats.push(this.id);
+				}
+			});
+			
+			$('.seat').mouseenter(function(){
+				$(this).addClass("hovering");
+				$('.seat').mouseleave(function(){
+					$(this).removeClass("hovering");
+				});
+			});
+		});
+};
+
+$("#finish").click(function() {
+	console.log(selectedSeats);
+});
+
+	</script>
+</body>
